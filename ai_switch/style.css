@@ -1,0 +1,86 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+  
+  body {
+    overflow: hidden;
+    background: #000;
+    color: #fff;
+    font-family: system-ui, -apple-system, "Segoe UI", "Noto Sans TC", sans-serif;
+  }
+  
+  /* 背景影片鋪滿畫面 */
+  #bgVideo {
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 0;
+  }
+  
+  /* UI 疊在影片上面 */
+  .ui-layer {
+    position: fixed;
+    inset: 0;
+    z-index: 10;
+    pointer-events: none;
+  }
+  
+  /* 通用按鈕 */
+  .btn {
+    position: absolute;
+    pointer-events: auto;
+    padding: 8px 14px;
+    border-radius: 999px;
+    border: none;
+    background: rgba(255, 255, 255, 0.12);
+    backdrop-filter: blur(6px);
+    color: #fff;
+    cursor: pointer;
+  }
+  
+  /* 左下角開關 */
+  .btn-power {
+    left: 20px;
+    bottom: 20px;
+  }
+  
+  /* 右下角三角形 */
+  .btn-triangle {
+    right: 20px;
+    bottom: 20px;
+  }
+  
+  /* 資訊面板 */
+  .info-panel {
+    position: absolute;
+    left: 50%;
+    top: 15%;
+    transform: translateX(-50%);
+    padding: 10px 16px;
+    background: rgba(0, 0, 0, 0.7);
+    border-radius: 12px;
+    font-size: 14px;
+    opacity: 0;
+    pointer-events: none;
+  }
+  
+  /* 顯示狀態 */
+  .info-panel.show {
+    animation: fadeIn 0.3s forwards;
+  }
+  
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translate(-50%, -8px);
+    }
+    to {
+      opacity: 1;
+      transform: translate(-50%, 0);
+    }
+  }
+  
