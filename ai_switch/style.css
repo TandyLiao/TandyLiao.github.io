@@ -62,33 +62,40 @@
     user-select: none;
   }
 
-  .corner-circle{
-    position: absolute;
-    right: calc(100px + env(safe-area-inset-right));
-    bottom: calc(16px + env(safe-area-inset-bottom));
-  
-    width: 300px;
-    height: 300px;
-    border-radius: 50%;
-  
-    background: rgba(157, 32, 32, 0.45); /* 半透明黑 */
-    backdrop-filter: blur(4px);      /* 可選：有質感 */
-  
-    z-index: 4;          /* 在影片上、機車下/上可自行調 */
-    pointer-events: none; /* 不影響按鈕點擊 */
+  :root{
+    --gap: clamp(10px, 2vw, 20px);
   }
-
-  .ai_switch{
-    position: absolute;        /* ⭐一定要有 */
   
-    width: 600px;
-    height: 600px;
+  /* 右下角大圓形：固定在視窗右下 */
+  .corner-circle{
+    position: fixed;
+    right: calc(var(--gap) + env(safe-area-inset-right));
+    bottom: calc(var(--gap) + env(safe-area-inset-bottom));
+  
+    width: clamp(180px, 36vw, 300px);
+    height: clamp(180px, 36vw, 300px);
     border-radius: 50%;
   
-    left: 50%;                 /* ⭐改這行 */
-    bottom: -150px;             /* 保留你原本的 */
+    background: rgba(157, 32, 32, 0.45);
+    backdrop-filter: blur(4px);
   
-    transform: translateX(-50%); /* ⭐置中修正 */
+    z-index: 4;
+    pointer-events: none; /* 圓形不吃點擊 */
+  }
+  
+  /* 開關：永遠貼在圓形上（可點） */
+  .ai_switch{
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%); /* ⭐真正正中央 */
+  
+    width: clamp(500px, 36vw, 300px);
+    height: clamp(500px, 36vw, 300px);    
+    border-radius: 50%;
+  
+    background: rgba(0, 0, 0, 0.45);
+    backdrop-filter: blur(4px);
   
     display: flex;
     align-items: center;
@@ -98,14 +105,15 @@
     pointer-events: auto;
   }
   
+  
+  /* 圖片不爆版（最重要） */
   .ai_switch img{
-    width: 60%;
+    width: 70%;        /* 跟著放大 */
+    max-width: 250px;  /* ⭐保底，不會失控 */
     height: auto;
     pointer-events: none;
     user-select: none;
   }
-  
-  
   
 
   /* 通用按鈕 */
@@ -118,7 +126,7 @@
   
     border-radius: 999px;
     border: none;
-    background: rgba(255, 255, 255, 0.12);
+    background: rgba(39, 117, 61, 0.12);
     backdrop-filter: blur(6px);
     color: #fff;
     cursor: pointer;
