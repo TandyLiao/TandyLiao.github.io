@@ -3,17 +3,25 @@
 <head>
   <meta charset="UTF-8" />
   <title>霧燈互動 Demo</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <video id="bgVideo" src="video.mp4" playsinline webkit-playsinline></video>
+  <video
+    id="bgVideo"
+    src="video.mp4"
+    autoplay
+    muted
+    loop
+    playsinline
+    webkit-playsinline
+  ></video>
 
   <div class="ui-layer">
-    <button id="btnPower" class="btn btn-power">開關</button>
-    <button id="btnTriangle" class="btn btn-triangle">▲</button>
+    <button id="btnPower" class="btn btn-power" type="button">開關</button>
+    <button id="btnTriangle" class="btn btn-triangle" type="button" aria-label="下一步">▲</button>
 
-    <div id="infoPanel" class="info-panel">
+    <div id="infoPanel" class="info-panel" role="status" aria-live="polite">
       <p>這裡之後可以放爆閃／交互閃狀態說明</p>
     </div>
   </div>
