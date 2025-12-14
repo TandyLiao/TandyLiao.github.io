@@ -4,6 +4,19 @@
     padding: 0;
   }
   
+  :root {
+    /* 響應式間距：手機不會太擠、桌機也不會太大 */
+    --gap: clamp(12px, 2.2vw, 24px);
+  
+    /* 按鈕內距、字級 */
+    --btn-py: clamp(8px, 1.6vw, 12px);
+    --btn-px: clamp(12px, 2.2vw, 18px);
+    --btn-font: clamp(13px, 1.8vw, 16px);
+  
+    /* 面板字級 */
+    --panel-font: clamp(13px, 1.8vw, 16px);
+  }
+  
   body {
     overflow: hidden;
     background: #000;
@@ -17,7 +30,7 @@
     inset: 0;
     width: 100%;
     height: 100%;
-    object-fit: cover;
+    object-fit: contain;
     z-index: 0;
   }
   
@@ -33,39 +46,54 @@
   .btn {
     position: absolute;
     pointer-events: auto;
-    padding: 8px 14px;
+  
+    padding: var(--btn-py) var(--btn-px);
+    font-size: var(--btn-font);
+  
     border-radius: 999px;
     border: none;
     background: rgba(255, 255, 255, 0.12);
     backdrop-filter: blur(6px);
     color: #fff;
     cursor: pointer;
+  
+    /* 手機點擊友善 */
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
   }
   
-  /* 左下角開關 */
+  /* ✅ 左下角開關：支援安全區 + 響應式間距 */
   .btn-power {
-    left: 20px;
-    bottom: 20px;
+    left: calc(var(--gap) + env(safe-area-inset-left));
+    bottom: calc(var(--gap) + env(safe-area-inset-bottom));
   }
   
-  /* 右下角三角形 */
+  /* ✅ 右下角三角形：支援安全區 + 響應式間距 */
   .btn-triangle {
-    right: 20px;
-    bottom: 20px;
+    right: calc(var(--gap) + env(safe-area-inset-right));
+    bottom: calc(var(--gap) + env(safe-area-inset-bottom));
   }
   
   /* 資訊面板 */
   .info-panel {
     position: absolute;
     left: 50%;
-    top: 15%;
+    top: calc(12vh + env(safe-area-inset-top));
     transform: translateX(-50%);
-    padding: 10px 16px;
+  
+    padding: clamp(10px, 2vw, 14px) clamp(14px, 2.8vw, 18px);
     background: rgba(0, 0, 0, 0.7);
     border-radius: 12px;
-    font-size: 14px;
+  
+    font-size: var(--panel-font);
+    line-height: 1.35;
+  
     opacity: 0;
     pointer-events: none;
+  
+    /* 避免太寬 */
+    max-width: min(92vw, 520px);
+    text-align: center;
   }
   
   /* 顯示狀態 */
