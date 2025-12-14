@@ -34,7 +34,7 @@
     height: 100dvh;          /* 沒支援就會用下面這行 */
     height: 100vh;
   
-    object-fit: contain;     /* ✅ 絕對不裁切 */
+    object-fit: cover; 
     object-position: center; /* ✅ 永遠置中 */
     background: #000;
     z-index: 0;
@@ -49,6 +49,65 @@
     pointer-events: none;
   }
   
+  .moto{
+    position: absolute;
+    left: 50%;
+    bottom: env(safe-area-inset-bottom);
+    transform: translateX(-50%) scaleX(1.12); /* ⭐只拉寬 */
+    transform-origin: center bottom;
+  
+    width: min(92vw, 900px);
+    height: auto;
+    pointer-events: none;  /* 不擋按鈕點擊 */
+    user-select: none;
+  }
+
+  .corner-circle{
+    position: absolute;
+    right: calc(100px + env(safe-area-inset-right));
+    bottom: calc(16px + env(safe-area-inset-bottom));
+  
+    width: 300px;
+    height: 300px;
+    border-radius: 50%;
+  
+    background: rgba(157, 32, 32, 0.45); /* 半透明黑 */
+    backdrop-filter: blur(4px);      /* 可選：有質感 */
+  
+    z-index: 4;          /* 在影片上、機車下/上可自行調 */
+    pointer-events: none; /* 不影響按鈕點擊 */
+  }
+
+  .ai_switch{
+    position: absolute;        /* ⭐一定要有 */
+  
+    width: 600px;
+    height: 600px;
+    border-radius: 50%;
+  
+    left: 50%;                 /* ⭐改這行 */
+    bottom: -150px;             /* 保留你原本的 */
+  
+    transform: translateX(-50%); /* ⭐置中修正 */
+  
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  
+    z-index: 6;
+    pointer-events: auto;
+  }
+  
+  .ai_switch img{
+    width: 60%;
+    height: auto;
+    pointer-events: none;
+    user-select: none;
+  }
+  
+  
+  
+
   /* 通用按鈕 */
   .btn {
     position: absolute;
@@ -71,13 +130,13 @@
   
   /* ✅ 左下角開關：支援安全區 + 響應式間距 */
   .btn-power {
-    left: calc(var(--gap) + env(safe-area-inset-left));
+    right: calc(var(--gap) + env(safe-area-inset-right));
     bottom: calc(var(--gap) + env(safe-area-inset-bottom));
   }
   
   /* ✅ 右下角三角形：支援安全區 + 響應式間距 */
   .btn-triangle {
-    right: calc(var(--gap) + env(safe-area-inset-right));
+    left: calc(var(--gap) + env(safe-area-inset-left));
     bottom: calc(var(--gap) + env(safe-area-inset-bottom));
   }
   
