@@ -25,13 +25,20 @@
   }
   
   /* 背景影片鋪滿畫面 */
-  #bgVideo {
+  #bgVideo{
     position: fixed;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
+    top: 0;
+    left: 0;
+  
+    width: 100vw;
+    height: 100dvh;          /* 沒支援就會用下面這行 */
+    height: 100vh;
+  
+    object-fit: contain;     /* ✅ 絕對不裁切 */
+    object-position: center; /* ✅ 永遠置中 */
+    background: #000;
     z-index: 0;
+    transform: none;         /* ✅ 確保沒被 scale 影響 */
   }
   
   /* UI 疊在影片上面 */
